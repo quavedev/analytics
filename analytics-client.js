@@ -7,7 +7,7 @@ import { useEffect, useRef } from 'react';
 export const PACKAGE_NAME = 'quave:analytics';
 export const settings = getSettings({ packageName: PACKAGE_NAME });
 
-const { googleAnalyticsTrackingId, googleAdsTrackingId } = settings || {};
+const { googleAnalyticsTrackingId, googleAdsTrackingId, debug } = settings || {};
 
 const ga = (...rest) => {
   const googleAnalytics = window.gtag;
@@ -35,7 +35,7 @@ const hasScript = () =>
     script.src.includes('googletagmanager')
   );
 
-export const loadGoogleAnalytics = store => {
+export const loadGoogleAnalytics = () => {
   if (!Meteor.isClient || hasScript()) {
     return false;
   }
@@ -77,8 +77,10 @@ export const useGoogleAnalyticsPageView = ({ title } = {}) => {
       !lastPageLocationPathRef.current ||
       lastPageLocationPathRef.current !== pageLocationPath
     ) {
-      // eslint-disable-next-line no-console
-      console.log('pageview', pageLocationPath);
+      if (debug) {
+        // eslint-disable-next-line no-console
+        console.log('pageview', pageLocationPath);
+      }
       sendConfigToAnalytics({
         page_title: title || (window.document && window.document.title),
         page_location: window.location.href,

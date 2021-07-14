@@ -1,6 +1,6 @@
 Package.describe({
   name: 'quave:analytics',
-  version: '1.0.0',
+  version: '1.0.1',
   summary: 'Utility package to send page views to Google Analytics',
   git: 'https://github.com/quavedev/logs',
 });

@@ -67,6 +67,10 @@ const Routes = () => {
 }
 ```
 
+## Debugging
+
+Add `debug: true` to package settings to see page view logs in the client.
+
 ### License
 
 MIT
